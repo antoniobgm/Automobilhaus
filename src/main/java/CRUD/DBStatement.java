@@ -408,6 +408,26 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
     }
 
 
+    public void updateDataFahrzeug(String fahrzeugty, String fahrzeugbez, String h, int v1, int v2) throws SQLException {
+        String updateQuery = "UPDATE " + TABLE_FAHRZEUG + " SET "  + COLUMN_FAHRZEUGTYP + " = " +"'"+ fahrzeugty+"'"+", "+ COLUMN_HERSTELLER+ " = "+"'"+h+"'"+", "+COLUMN_VERKAUFSPREISE+" = "
+                + v1 +", "+COLUMN_LEISTUNG+" = "+v2+ " WHERE " + COLUMN_FAHRZEUGBEZEICHNUNG + " = "+"'" + fahrzeugbez+"'";
+
+        System.out.println(updateQuery);
+
+        try {
+            connection = dbConnection.getConnection();
+            statement = connection.createStatement();
+            if (statement != null) {
+                statement.executeUpdate(updateQuery);
+            }
+        } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
+
+
 
 
 

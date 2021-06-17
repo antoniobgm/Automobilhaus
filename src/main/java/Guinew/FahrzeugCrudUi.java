@@ -155,4 +155,26 @@ public class FahrzeugCrudUi {
     }*/
 
 
-}}
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{DBStatement dbStatement=new DBStatement();
+                    dbStatement.updateDataFahrzeug(textFahrzeugtyp.getText(),textFahrzeugbezeichnung.getText(),textFahrzeughersteller.getText(),Integer.parseInt(textVerkaufspreise.getText()),Integer.parseInt(textLeisung.getText()));
+                    JOptionPane.showMessageDialog(null,"RECORD UPDATED!!");
+                    tabellenload1();
+                    textFahrzeugtyp.setText("");
+                    textFahrzeugbezeichnung.setText("");
+                    textFahrzeughersteller.setText("");
+                    textVerkaufspreise.setText("");
+                    textLeisung.setText("");
+                    textFahrzeugbezeichnung.requestFocus();
+
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }}
