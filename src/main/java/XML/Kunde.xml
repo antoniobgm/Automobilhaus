@@ -1,0 +1,18 @@
+
+<Kunden>
+    <Kunde>
+        <Nachname>Jones</Nachname>
+        <Vorname>Tom</Vorname>
+        <Anschrift>Wall Street 3</Anschrift>
+    </Kunde>
+    <Kunde >
+        <Nachname>Vanessa</Nachname>
+        <Vorname>Müller</Vorname>
+        <Anschrift>Am Tor 4</Anschrift>
+    </Kunde>
+    <Kunde>
+        <Nachname>Theodor</Nachname>
+        <Vorname>K</Vorname>
+        <Anschrift>Talweg 9,53111 Düsseldorf</Anschrift>
+    </Kunde>
+</Kunden>
