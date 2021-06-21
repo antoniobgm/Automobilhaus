@@ -492,6 +492,23 @@ public void insertDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, S
         finally {myStmt.close();
             connection.close();}}
 
+    public boolean returnDuplicateImportFahrzeug(String Hash) throws SQLException {
+        String searchHashSQL ="SELECT * FROM "+ TABLE_IMPORT_FAHRZEUG+ " WHERE "+ COLUMN_HASH_KUNDE+ " = "+"'"+Hash+"'";
+        PreparedStatement myStmt=null;
+        ResultSet myRs=null;
+
+        try {
+            connection = dbConnection.getConnection();
+            myStmt = connection.prepareStatement(searchHashSQL);
+            if (myStmt != null) {
+                myRs =myStmt.executeQuery();
+            }
+            return myRs.next(); }
+
+
+        finally {myStmt.close();
+            connection.close();}}
+
 
 
 

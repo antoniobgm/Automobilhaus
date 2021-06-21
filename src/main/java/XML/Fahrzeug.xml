@@ -2,28 +2,28 @@
 <Fahrzeuge>
     <Fahrzeug>
         <Fahrzeugtyp>PKW</Fahrzeugtyp>
-        <Fahrzeugbezeichnung>Opel Astra K</Fahrzeugbezeichnung>
+        <Fahrzeugbezeichnung>Opel Astra K2</Fahrzeugbezeichnung>
         <Hersteller>Opel</Hersteller>
         <Leistung>23</Leistung>
         <Verkaufspreise>453</Verkaufspreise>
     </Fahrzeug>
     <Fahrzeug>
         <Fahrzeugtyp>LKW</Fahrzeugtyp>
-        <Fahrzeugbezeichnung>Lisav</Fahrzeugbezeichnung>
+        <Fahrzeugbezeichnung>Lisav G3</Fahrzeugbezeichnung>
         <Hersteller>Nissan</Hersteller>
         <Leistung>123</Leistung>
         <Verkaufspreise>45</Verkaufspreise>
     </Fahrzeug>
     <Fahrzeug>
         <Fahrzeugtyp>Fahrrad</Fahrzeugtyp>
-        <Fahrzeugbezeichnung>Astra 5</Fahrzeugbezeichnung>
+        <Fahrzeugbezeichnung>Astra S5</Fahrzeugbezeichnung>
         <Hersteller>Ferrari</Hersteller>
         <Leistung>345</Leistung>
         <Verkaufspreise>23422</Verkaufspreise>
     </Fahrzeug>
     <Fahrzeug>
         <Fahrzeugtyp>Motorrad</Fahrzeugtyp>
-        <Fahrzeugbezeichnung>Meghnav ST</Fahrzeugbezeichnung>
+        <Fahrzeugbezeichnung>Meghnav STV</Fahrzeugbezeichnung>
         <Hersteller>Toyota</Hersteller>
         <Leistung>2344</Leistung>
         <Verkaufspreise>256642</Verkaufspreise>

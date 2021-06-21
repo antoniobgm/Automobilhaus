@@ -72,7 +72,7 @@ public class Application {
 
         try {
             String hashFahrzeug = ImportFahrzeug.getHashImportFahrzeug();
-            if (!(dbStatement.returnDuplicateImportKunde(hashFahrzeug)))
+            if (!(dbStatement.returnDuplicateImportFahrzeug(hashFahrzeug)))
             {
                 Fahrzeuge = ImportFahrzeug.importFahrzeug();
                 System.out.println("Hier wurde geimported");
@@ -82,7 +82,7 @@ public class Application {
                     } catch (Exception e) {
                         e.printStackTrace();
                     } }else{
-                System.out.println("Import ist schon auf der DB. Sehe Hash "+hashFahrzeug);
+                System.out.println("Import ist schon auf der DB. Siehe Hash "+hashFahrzeug);
             }
 
         } catch(Exception e){e.printStackTrace();}
@@ -98,7 +98,8 @@ public class Application {
                 } catch(Exception e){
                     e.printStackTrace();
                 }}else{
-                System.out.println("Import ist schon auf der DB. Sehe Hash "+hashKunde);
+                System.out.println("Import ist schon auf der DB. Si" +
+                        "ehe Hash "+hashKunde);
             }
         }
         catch(Exception e){e.printStackTrace();}
