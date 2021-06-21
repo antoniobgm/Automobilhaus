@@ -2,10 +2,8 @@ package Guinew;
 
 import CRUD.DBStatement;
 import DB.DBConnection;
-import Gui.FahrzeugTabelle;
-import Gui.KundenTabelle;
+import GuiTabellen.FahrzeugTabelle;
 import SAX.Fahrzeug;
-import SAX.Kunde;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -117,7 +115,7 @@ public class FahrzeugCrudUi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBStatement dbStatement=new DBStatement();
-                try{dbStatement.insertDataFahrzeug(textFahrzeugtyp.getText(),textFahrzeugbezeichnung.getText(),textFahrzeughersteller.getText(),Integer.parseInt(textVerkaufspreise.getText()),Integer.parseInt(textVerkaufspreise.getText()));
+                try{dbStatement.insertDataFahrzeug(textFahrzeugtyp.getText(),textFahrzeugbezeichnung.getText(),textFahrzeughersteller.getText(),Integer.parseInt(textVerkaufspreise.getText()),Integer.parseInt(textVerkaufspreise.getText()),"EXTERN GELADEN");
 
 
                     //table_load();

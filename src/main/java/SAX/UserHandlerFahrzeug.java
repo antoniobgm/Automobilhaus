@@ -5,7 +5,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
 
-public class UserHandler extends DefaultHandler {
+public class UserHandlerFahrzeug extends DefaultHandler {
     private StringBuilder data=null;
     Fahrzeug fahrzeug;
     boolean bFahrzeugtyp = false;

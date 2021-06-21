@@ -1,4 +1,4 @@
-package Gui;
+package GuiTabellen;
 
 import SAX.Kunde;
 
@@ -9,6 +9,8 @@ public class KundenTabelle extends AbstractTableModel {
     private static final int COLUMN_NACHNAME=0;
     private static final int COLUMN_VORNAME=1;
     private static final int COLUMN_ANSCHRIFT=2;
+    ;
+
 
     private String[] columnNames={"Nachname","Vorname","Anschrift"};
     private List<Kunde> Kunden;
@@ -37,6 +39,7 @@ public class KundenTabelle extends AbstractTableModel {
                 return tempKunde.getVorname();
             case COLUMN_ANSCHRIFT:
                 return tempKunde.getAnschrift();
+
             default:
                 return tempKunde.getNachname();}
         }

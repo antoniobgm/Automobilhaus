@@ -6,12 +6,12 @@
         <Anschrift>Wall Street 3</Anschrift>
     </Kunde>
     <Kunde >
-        <Nachname>Vanessa</Nachname>
+        <Nachname>Vansen</Nachname>
         <Vorname>Müller</Vorname>
         <Anschrift>Am Tor 4</Anschrift>
     </Kunde>
     <Kunde>
-        <Nachname>Theodor</Nachname>
+        <Nachname>Theodorheinrich</Nachname>
         <Vorname>K</Vorname>
         <Anschrift>Talweg 9,53111 Düsseldorf</Anschrift>
     </Kunde>

@@ -10,7 +10,9 @@ public class Kunde {
 
     }
 
-    public Kunde(String Nachname, String Vorname, String  Anschrift) {
+
+
+    public Kunde(String Nachname, String Vorname, String  Anschrift ) {
         super();
 
         this.Nachname=Nachname;
@@ -53,4 +55,7 @@ public class Kunde {
     public String toString() {
         return " Nachname=" + this.Nachname + " Vorname=" + this.Vorname + " Anschrift=" + this.Anschrift ;
     }
+
+
+    ;
 }

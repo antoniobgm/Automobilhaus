@@ -6,7 +6,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
 
-public class UserHandler2 extends DefaultHandler {
+public class UserHandlerKunde extends DefaultHandler {
     private StringBuilder data2=null;
     Kunde kunde;
     boolean bNachname = false;

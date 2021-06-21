@@ -2,7 +2,7 @@ package Guinew;
 
 import CRUD.DBStatement;
 import DB.DBConnection;
-import Gui.KundenTabelle;
+import GuiTabellen.KundenTabelle;
 import Main.CreatePdfA;
 import SAX.Kunde;
 import com.itextpdf.text.DocumentException;
@@ -69,7 +69,7 @@ public class KundeCrudUi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBStatement dbStatement=new DBStatement();
-                try{dbStatement.insertDataKunde(textNachname.getText(),textVorname.getText(),textAnschrift.getText());
+                try{dbStatement.insertDataKunde(textNachname.getText(),textVorname.getText(),textAnschrift.getText(), "EXTERNER EINTRAG");
 
 
                 //table_load();

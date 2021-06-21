@@ -5,13 +5,13 @@ import SAX.Fahrzeug;
 import SAX.Kunde;
 
 import javax.swing.*;
-import java.io.*;
-import java.math.BigDecimal;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DBStatement {
+
     private DBConnection dbConnection= new DBConnection();
     private Connection connection=null;
     private Statement statement=null;
@@ -36,10 +36,16 @@ public class DBStatement {
     private final String COLUMN_LEISTUNG="Leistung";
     private final String COLUMN_VERKAUFSPREISE="Verkaufspreise";
 
-    private final String TABLE_KUNDE="Kunde123";
+    private final String TABLE_KUNDE="Kunde1234";
     private final String COLUMN_NACHNAME="Nachname";
     private final String COLUMN_VORNAME="Vorname";
     private final String COLUMN_ANSCHRIFT="Anschrift";
+
+    private final String TABLE_IMPORT_KUNDE="IMPORT_KUNDE";
+    private final String COLUMN_HASH_KUNDE="Import_Hash";
+
+    private final String TABLE_IMPORT_FAHRZEUG="Import_Fahrzeug";
+    private final String COLUMN_HASH_FAHRZEUG="Import_Hash";
 
     public void createTable() throws SQLException {
         String createTable="CREATE TABLE IF NOT EXISTS "+ TABLE_FAHRZEUG +
@@ -58,9 +64,22 @@ public class DBStatement {
                 + COLUMN_NACHNAME + " VARCHAR(255), "
                 + COLUMN_VORNAME+ " VARCHAR(255), "
                 + COLUMN_ANSCHRIFT+ " VARCHAR(255) "
+
                 +" )";
 
         executQuery(createTable2);
+
+        String createTable3="CREATE TABLE IF NOT EXISTS "+ TABLE_IMPORT_KUNDE +
+                "( "
+                + COLUMN_HASH_KUNDE + " VARCHAR(255) "
+                +" )";
+        executQuery(createTable3);
+
+        String createTable4="CREATE TABLE IF NOT EXISTS "+ TABLE_IMPORT_FAHRZEUG +
+                "( "
+                + COLUMN_HASH_FAHRZEUG + " VARCHAR(255) "
+                +" )";
+        executQuery(createTable4);
     }
 public void showtables() throws SQLException {
         try{
@@ -74,8 +93,7 @@ public void showtables() throws SQLException {
             String name3 = rsmd.getColumnName(3);
             String name4 = rsmd.getColumnName(4);
             String name5 = rsmd.getColumnName(5);
-            //System.out.println(name1+name2+name3+name4+name5);
-
+            System.out.println(name1+name2+name3+name4+name5);
 
             }
         }
@@ -85,6 +103,33 @@ public void showtables() throws SQLException {
 
             }
 }
+
+    public void showtables2() throws SQLException {
+        try{
+            connection=dbConnection.getConnection();
+            statement=connection.createStatement();
+            if (statement!= null){
+                ResultSet rs = statement.executeQuery("SELECT * FROM "+TABLE_KUNDE);
+                ResultSetMetaData rsmd = rs.getMetaData();
+                String name1 = rsmd.getColumnName(1);
+                String name2 = rsmd.getColumnName(2);
+                String name3 = rsmd.getColumnName(3);
+                String name4 = rsmd.getColumnName(4);
+
+                System.out.println(name1+name2+name3+name4);
+
+            }
+        }
+        finally {
+            statement.close();
+            connection.close();
+
+        }
+    }
+
+
+
+
 public void executQuery(String sqlquery) throws SQLException{
     try {
         connection= dbConnection.getConnection();
@@ -99,18 +144,19 @@ public void executQuery(String sqlquery) throws SQLException{
     }
 
 }
-public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws SQLException{
+public void insertDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, String hersteller, int verkaufspreise, int leistung, String hashFahrzeug)throws SQLException{
     connection = dbConnection.getConnection();
     Statement myStmt = null;
     ResultSet myRs = null;
 
     try {
         myStmt = connection.createStatement();
-        myRs = myStmt.executeQuery("SELECT * FROM "+TABLE_FAHRZEUG +" WHERE "+COLUMN_FAHRZEUGBEZEICHNUNG+" = "+"'"+b+"'");
-        if (myRs.next()){System.out.println("Fahrzeug already exists");JOptionPane.showMessageDialog(null, "FAHRZEUG MIT FAHRZEUGBEZEICHNUNG " + b +" EXISTIERT BEREITS. BITTE UPDATEN");}
+        myRs = myStmt.executeQuery("SELECT * FROM "+TABLE_FAHRZEUG +" WHERE "+COLUMN_FAHRZEUGBEZEICHNUNG+" = "+"'"+fahrzeugbezeichnung+"'");
+        if (myRs.next()){System.out.println("Fahrzeug already exists");JOptionPane.showMessageDialog(null, "FAHRZEUG MIT FAHRZEUGBEZEICHNUNG " + fahrzeugbezeichnung +" EXISTIERT BEREITS. BITTE UPDATEN");}
         else{
-            String insertDatafahrzeug= "INSERT INTO "+ TABLE_FAHRZEUG+" VALUES (null, '"+a+"', '"+b+"', '"+c+"', "+d+", "+e+" )";
-            executQuery(insertDatafahrzeug);myRs.close();JOptionPane.showMessageDialog(null, "RECORD ADDED!!!!");}
+            String insertDatafahrzeug= "INSERT INTO "+ TABLE_FAHRZEUG+" VALUES (null, '"+fahrzeugtyp+"', '"+fahrzeugbezeichnung+"', '"+hersteller+"', "+verkaufspreise+", "+leistung+" )";
+            String insertHashFahrzeug= "INSERT INTO "+ TABLE_IMPORT_FAHRZEUG+" VALUES ( '"+hashFahrzeug+"' )";
+            executQuery(insertDatafahrzeug);executQuery(insertHashFahrzeug);myRs.close();JOptionPane.showMessageDialog(null, "RECORD ADDED!!!!");}
     }finally {
         myStmt.close();
 
@@ -120,18 +166,20 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
 
 }
 
-   public void insertDataKunde(String a, String b, String c)throws SQLException{
+   public void insertDataKunde(String nachname, String vorname, String anschrift, String hashKunde)throws SQLException{
         connection = dbConnection.getConnection();
         Statement myStmt = null;
-        ResultSet myRs = null;
+        ResultSet myRs;
         try {
             myStmt = connection.createStatement();
-            myRs = myStmt.executeQuery("SELECT * FROM "+TABLE_KUNDE +" WHERE "+COLUMN_NACHNAME+" = "+"'"+a+"'");
+            myRs = myStmt.executeQuery("SELECT * FROM "+TABLE_KUNDE +" WHERE "+COLUMN_NACHNAME+" = "+"'"+nachname+"'");
             if (myRs.next())
-            {System.out.println("Kunde already exists");JOptionPane.showMessageDialog(null, "KUNDE MIT NACHNAMEN " + a +" EXISTIERT BEREITS. ");}
+            {System.out.println("Kunde already exists");
+                JOptionPane.showMessageDialog(null, "KUNDE MIT NACHNAMEN " + nachname +" EXISTIERT BEREITS. ");}
             else{
-            String insertDatakunde= "INSERT INTO "+ TABLE_KUNDE+" VALUES (null, '"+a+"', '"+b+"', '"+c+"' )";
-            executQuery(insertDatakunde);myRs.close();JOptionPane.showMessageDialog(null, "RECORD ADDED!!!!");}
+            String insertDatakunde= "INSERT INTO "+ TABLE_KUNDE+" VALUES (null, '"+nachname+"', '"+vorname+"', '"+anschrift+"' )";
+            String insertHashKunde= "INSERT INTO "+ TABLE_IMPORT_KUNDE+" VALUES ( '"+hashKunde+"' )";
+            executQuery(insertDatakunde);executQuery(insertHashKunde);myRs.close();JOptionPane.showMessageDialog(null, "RECORD ADDED!!!!");}
             }finally {
             myStmt.close();
 
@@ -225,7 +273,7 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
 
         try {
             myStmt = connection.createStatement();
-            myRs = myStmt.executeQuery("select * from KUNDE123 order by VORNAME");
+            myRs = myStmt.executeQuery("select * From "+ TABLE_KUNDE+ " order by "+COLUMN_VORNAME);
 
             while (myRs.next()) {
                 Kunde tempEmployee = convertRowToKunde(myRs);
@@ -250,7 +298,7 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
 
         try {
             myStmt = connection.createStatement();
-            myRs = myStmt.executeQuery("select * from FAHRZEUG1234 order by Fahrzeugtyp");
+            myRs = myStmt.executeQuery("select * from "+TABLE_FAHRZEUG+" ORDER BY "+COLUMN_FAHRZEUGTYP);
 
             while (myRs.next()) {
                 Fahrzeug tempFahrzeug = convertRowToFahrzeug(myRs);
@@ -345,6 +393,7 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
             String anschrift = myRs.getString(COLUMN_ANSCHRIFT);
 
 
+
             Kunde tempEmployee = new Kunde(nachname, vorname, anschrift);
 
             return tempEmployee;
@@ -412,7 +461,6 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
         String updateQuery = "UPDATE " + TABLE_FAHRZEUG + " SET "  + COLUMN_FAHRZEUGTYP + " = " +"'"+ fahrzeugty+"'"+", "+ COLUMN_HERSTELLER+ " = "+"'"+h+"'"+", "+COLUMN_VERKAUFSPREISE+" = "
                 + v1 +", "+COLUMN_LEISTUNG+" = "+v2+ " WHERE " + COLUMN_FAHRZEUGBEZEICHNUNG + " = "+"'" + fahrzeugbez+"'";
 
-        System.out.println(updateQuery);
 
         try {
             connection = dbConnection.getConnection();
@@ -424,13 +472,27 @@ public void insertDataFahrzeug(String a, String b, String c, int d, int e)throws
             statement.close();
             connection.close();
         }
+
+
     }
+    public boolean returnDuplicateImportKunde(String Hash) throws SQLException {
+        String searchHashSQL ="SELECT * FROM "+ TABLE_IMPORT_KUNDE+ " WHERE "+ COLUMN_HASH_KUNDE+ " = "+"'"+Hash+"'";
+        PreparedStatement myStmt=null;
+        ResultSet myRs=null;
+
+        try {
+            connection = dbConnection.getConnection();
+            myStmt = connection.prepareStatement(searchHashSQL);
+            if (myStmt != null) {
+                myRs =myStmt.executeQuery();
+            }
+            return myRs.next(); }
+
+
+        finally {myStmt.close();
+            connection.close();}}
 
 
 
 
-
-
-
-
-}
+    }

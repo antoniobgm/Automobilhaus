@@ -1,49 +1,45 @@
 package Main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Properties;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import CRUD.DBStatement;
 import Guinew.FahrzeugCrudUi;
 import Guinew.KundeCrudUi;
 import SAX.Fahrzeug;
 import SAX.Kunde;
-import SAX.UserHandler;
-import SAX.UserHandler2;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
 
 public class Application {
 
-    public static void main(String[] args) {
+    private static ArrayList<Kunde> Kunden;
+    private static ArrayList<Fahrzeug> Fahrzeuge;
 
-        try {
-            Properties props= new Properties();
-            props.load(new FileInputStream("application.properties"));
-            String path1=props.getProperty("path1");
-            String path2=props.getProperty("path2");
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+        DBStatement dbStatement=new DBStatement();
+        
+
+            //Properties props= new Properties();
+            //String pathFahrzeug=props.getProperty("path1");
+            //String pathKunde=props.getProperty("path2");
             //System.out.println(path1);
 
-            File inputFile = new File(path1);
-            File inputFile2 = new File(path2);
+            //File inputFileFahrzeug = new File(pathFahrzeug);
+            //File inputFileKunde = new File(pathKunde);
             //File inputFile = new File("C:\\Users\\anton\\IdeaProjects\\Automobilhaus\\src\\main\\java\\XML\\Fahrzeug.xml");
             //File inputFile2 = new File("C:\\Users\\anton\\IdeaProjects\\Automobilhaus\\src\\main\\java\\XML\\Kunde.xml");
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
-            UserHandler userhandler = new UserHandler();
-            UserHandler2 userhandler2 = new UserHandler2();
 
-            saxParser.parse(inputFile, userhandler);
-            saxParser.parse(inputFile2,userhandler2);
-            ArrayList<Fahrzeug> Fahrzeuge = userhandler.getFList();
-            ArrayList<Kunde> Kunden =userhandler2.getKList();
-            DBStatement dbStatement=new DBStatement();
+            //UserHandlerFahrzeug userhandlerFahrzeug = new UserHandlerFahrzeug();
+            //UserHandlerKunde userhandlerKunde = new UserHandlerKunde();
+
+            //saxParser.parse(inputFileFahrzeug, userhandlerFahrzeug);
+            //saxParser.parse(inputFileKunde,userhandlerKunde);
+            //ArrayList<Fahrzeug> Fahrzeuge = userhandlerFahrzeug.getFList();
+            //ArrayList<Kunde> Kunden =userhandlerKunde.getKList();
+            //ImportKunde.importKunde();
 
 
             try {
@@ -67,33 +63,57 @@ public class Application {
                 e.printStackTrace();
             }
 
-            for(Fahrzeug emp : Fahrzeuge)
-                try {
-                    dbStatement.insertDataFahrzeug(emp.getFahrzeugtyp(), emp.getFahrzeugbezeichnung(), emp.getHersteller(), emp.getLeistung(), emp.getVerkaufspreise());
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
+        try{
+            dbStatement.showtables2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
-
-            for (Kunde emp: Kunden)
-                try {
-                    dbStatement.insertDataKunde(emp.getNachname(), emp.getVorname(), emp.getAnschrift());
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
-        /*
 
         try {
+            String hashFahrzeug = ImportFahrzeug.getHashImportFahrzeug();
+            if (!(dbStatement.returnDuplicateImportKunde(hashFahrzeug)))
+            {
+                Fahrzeuge = ImportFahrzeug.importFahrzeug();
+                System.out.println("Hier wurde geimported");
+                for (Fahrzeug emp : Fahrzeuge)
+                    try {
+                        dbStatement.insertDataFahrzeug(emp.getFahrzeugtyp(), emp.getFahrzeugbezeichnung(), emp.getHersteller(), emp.getLeistung(), emp.getVerkaufspreise(),hashFahrzeug);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } }else{
+                System.out.println("Import ist schon auf der DB. Sehe Hash "+hashFahrzeug);
+            }
+
+        } catch(Exception e){e.printStackTrace();}
+
+        try{ String hashKunde=ImportKunde.getHashImportKunde();
+            if(!(dbStatement.returnDuplicateImportKunde(hashKunde)))
+            {
+            Kunden=ImportKunde.importKunde();
+            for (Kunde emp: Kunden)
+                try {
+                    dbStatement.insertDataKunde(emp.getNachname(), emp.getVorname(), emp.getAnschrift(),hashKunde);
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }}else{
+                System.out.println("Import ist schon auf der DB. Sehe Hash "+hashKunde);
+            }
+        }
+        catch(Exception e){e.printStackTrace();}
+
+
+
+
+
+
+			 /*
+            try {
 				dbStatement.getDataFahrzeug();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-            try {
-                dbStatement.getDataKunde();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             try {
                 dbStatement.searchKunde("jas");
@@ -125,8 +145,6 @@ public class Application {
 
 
 
-        } catch ( Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }
