@@ -191,7 +191,7 @@ public void insertDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, S
 
 
 
-    public void getDataFahrzeug() throws SQLException {
+   /* public void getDataFahrzeug() throws SQLException {
         String getData = "SELECT * FROM " + TABLE_FAHRZEUG;
 
         createQueryFahrzeug(getData);
@@ -201,7 +201,7 @@ public void insertDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, S
         String getData = "SELECT * FROM " + TABLE_KUNDE;
 
         createQueryKunde(getData);
-    }
+    }*/
     private void showDataFahrzeug(ResultSet resultSet) throws SQLException{
         while(resultSet.next()){
             System.out.print(resultSet.getString((COLUMN_ID)));
@@ -457,9 +457,9 @@ public void insertDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, S
     }
 
 
-    public void updateDataFahrzeug(String fahrzeugty, String fahrzeugbez, String h, int v1, int v2) throws SQLException {
-        String updateQuery = "UPDATE " + TABLE_FAHRZEUG + " SET "  + COLUMN_FAHRZEUGTYP + " = " +"'"+ fahrzeugty+"'"+", "+ COLUMN_HERSTELLER+ " = "+"'"+h+"'"+", "+COLUMN_VERKAUFSPREISE+" = "
-                + v1 +", "+COLUMN_LEISTUNG+" = "+v2+ " WHERE " + COLUMN_FAHRZEUGBEZEICHNUNG + " = "+"'" + fahrzeugbez+"'";
+    public void updateDataFahrzeug(String fahrzeugtyp, String fahrzeugbezeichnung, String hersteller, int leistung, int verkaufspreise) throws SQLException {
+        String updateQuery = "UPDATE " + TABLE_FAHRZEUG + " SET "  + COLUMN_FAHRZEUGTYP + " = " +"'"+ fahrzeugtyp+"'"+", "+ COLUMN_HERSTELLER+ " = "+"'"+hersteller+"'"+", "+COLUMN_VERKAUFSPREISE+" = "
+                + leistung +", "+COLUMN_LEISTUNG+" = "+verkaufspreise+ " WHERE " + COLUMN_FAHRZEUGBEZEICHNUNG + " = "+"'" + fahrzeugbezeichnung+"'";
 
 
         try {

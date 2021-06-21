@@ -15,13 +15,11 @@ import java.util.Properties;
 public class ImportFahrzeug {
     private static System props;
 
-    static ArrayList<Fahrzeug> importFahrzeug() {
+    public ArrayList<Fahrzeug> importFahrzeugArray( String pathFahrzeug) {
 
         ArrayList<Fahrzeug> Fahrzeuge = null;
         try {
-            Properties props = new Properties();
-            props.load(new FileInputStream("application.properties"));
-            String pathFahrzeug = props.getProperty("path1");
+
             //System.out.println(path1);
             File inputFileFahrzeug = new File(pathFahrzeug);
             //File inputFile = new File("C:\\Users\\anton\\IdeaProjects\\Automobilhaus\\src\\main\\java\\XML\\Fahrzeug.xml");
@@ -50,10 +48,8 @@ public class ImportFahrzeug {
     }
 
 
-    public static String getHashImportFahrzeug() throws IOException {
-        Properties props = new Properties();
-        props.load(new FileInputStream("application.properties"));
-        String pathFahrzeug = props.getProperty("path1");
+    public static String getHashImportFahrzeug(String pathFahrzeug) throws IOException {
+
         String xmlstring =readFile(pathFahrzeug);
         String hash2 = DigestUtils.sha256Hex( xmlstring);
         System.out.println("Apache : Sha256hash: "+ hash2);

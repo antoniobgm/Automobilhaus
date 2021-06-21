@@ -8,6 +8,7 @@ import SAX.Kunde;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,30 +17,15 @@ import java.util.Properties;
 public class Application {
 
     private static ArrayList<Kunde> Kunden;
-    private static ArrayList<Fahrzeug> Fahrzeuge;
+    private static  ArrayList<Fahrzeug> Fahrzeuge;
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         DBStatement dbStatement=new DBStatement();
+        Properties props = new Properties();
+        props.load(new FileInputStream("application.properties"));
+        String pathFahrzeug = props.getProperty("path1");
+        String pathKunde = props.getProperty("path2");
         
-
-            //Properties props= new Properties();
-            //String pathFahrzeug=props.getProperty("path1");
-            //String pathKunde=props.getProperty("path2");
-            //System.out.println(path1);
-
-            //File inputFileFahrzeug = new File(pathFahrzeug);
-            //File inputFileKunde = new File(pathKunde);
-            //File inputFile = new File("C:\\Users\\anton\\IdeaProjects\\Automobilhaus\\src\\main\\java\\XML\\Fahrzeug.xml");
-            //File inputFile2 = new File("C:\\Users\\anton\\IdeaProjects\\Automobilhaus\\src\\main\\java\\XML\\Kunde.xml");
-
-            //UserHandlerFahrzeug userhandlerFahrzeug = new UserHandlerFahrzeug();
-            //UserHandlerKunde userhandlerKunde = new UserHandlerKunde();
-
-            //saxParser.parse(inputFileFahrzeug, userhandlerFahrzeug);
-            //saxParser.parse(inputFileKunde,userhandlerKunde);
-            //ArrayList<Fahrzeug> Fahrzeuge = userhandlerFahrzeug.getFList();
-            //ArrayList<Kunde> Kunden =userhandlerKunde.getKList();
-            //ImportKunde.importKunde();
 
 
             try {
@@ -71,10 +57,10 @@ public class Application {
 
 
         try {
-            String hashFahrzeug = ImportFahrzeug.getHashImportFahrzeug();
+            String hashFahrzeug = ImportFahrzeug.getHashImportFahrzeug(pathFahrzeug);
             if (!(dbStatement.returnDuplicateImportFahrzeug(hashFahrzeug)))
-            {
-                Fahrzeuge = ImportFahrzeug.importFahrzeug();
+            {ImportFahrzeug importF= new ImportFahrzeug();
+                Fahrzeuge = importF.importFahrzeugArray(pathFahrzeug);
                 System.out.println("Hier wurde geimported");
                 for (Fahrzeug emp : Fahrzeuge)
                     try {
@@ -82,15 +68,15 @@ public class Application {
                     } catch (Exception e) {
                         e.printStackTrace();
                     } }else{
-                System.out.println("Import ist schon auf der DB. Siehe Hash "+hashFahrzeug);
+                System.out.println("Import ist schon auf der DB. Siehe Hash: "+hashFahrzeug);
             }
 
         } catch(Exception e){e.printStackTrace();}
 
-        try{ String hashKunde=ImportKunde.getHashImportKunde();
+        try{ String hashKunde=ImportKunde.getHashImportKunde(pathKunde);
             if(!(dbStatement.returnDuplicateImportKunde(hashKunde)))
-            {
-            Kunden=ImportKunde.importKunde();
+            {ImportKunde importK= new ImportKunde();
+            Kunden=importK.importKundeArray(pathKunde);
             for (Kunde emp: Kunden)
                 try {
                     dbStatement.insertDataKunde(emp.getNachname(), emp.getVorname(), emp.getAnschrift(),hashKunde);
@@ -99,7 +85,7 @@ public class Application {
                     e.printStackTrace();
                 }}else{
                 System.out.println("Import ist schon auf der DB. Si" +
-                        "ehe Hash "+hashKunde);
+                        "ehe Hash: "+hashKunde);
             }
         }
         catch(Exception e){e.printStackTrace();}

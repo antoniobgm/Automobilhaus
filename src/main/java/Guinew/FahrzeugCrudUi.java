@@ -48,8 +48,8 @@ public class FahrzeugCrudUi {
                 fahrze = dbStatement.getAllFahrzeuge();
                 FahrzeugTabelle model2 = new FahrzeugTabelle(fahrze);
                 table2.setModel(model2);
-                for(Fahrzeug at:fahrze)
-                    System.out.println(at);
+                //for(Fahrzeug at:fahrze)
+                 //   System.out.println(at);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -115,7 +115,7 @@ public class FahrzeugCrudUi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DBStatement dbStatement=new DBStatement();
-                try{dbStatement.insertDataFahrzeug(textFahrzeugtyp.getText(),textFahrzeugbezeichnung.getText(),textFahrzeughersteller.getText(),Integer.parseInt(textVerkaufspreise.getText()),Integer.parseInt(textVerkaufspreise.getText()),"EXTERN GELADEN");
+                try{dbStatement.insertDataFahrzeug(textFahrzeugtyp.getText(),textFahrzeugbezeichnung.getText(),textFahrzeughersteller.getText(),Integer.parseInt(textLeisung.getText()),Integer.parseInt(textVerkaufspreise.getText()),"EXTERN GELADEN");
 
 
                     //table_load();
@@ -129,28 +129,6 @@ public class FahrzeugCrudUi {
         });
 
 
-    /*public void start1() {
-        JFrame frame = new JFrame("FahrzeugCrudUi");
-        frame.setContentPane(new FahrzeugCrudUi().MainCrud);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    void tabellenload1() throws Exception {
-        try {
-            DBStatement dbStatement=new DBStatement();
-            List<Fahrzeug> fahrze = null;
-
-            fahrze = dbStatement.getAllFahrzeuge();
-            FahrzeugTabelle model = new FahrzeugTabelle(fahrze);
-            table2.setModel(model);
-            for(Fahrzeug at:fahrze)
-            System.out.println(at);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
         updateButton.addActionListener(new ActionListener() {

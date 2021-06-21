@@ -51,8 +51,8 @@ public class KundeCrudUi {
             Kunden = dbStatement.getAllKunden();
             KundenTabelle model = new KundenTabelle(Kunden);
             table1.setModel(model);
-            for(Kunde at:Kunden)
-            System.out.println(at);
+            //for(Kunde at:Kunden)
+            //System.out.println(at);
 
         } catch (SQLException e) {
             e.printStackTrace();

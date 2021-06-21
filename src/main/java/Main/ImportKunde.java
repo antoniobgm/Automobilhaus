@@ -13,15 +13,13 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class ImportKunde {
-    static Properties props = new Properties();
 
-    static ArrayList<Kunde> importKunde() {
+
+    public  ArrayList<Kunde> importKundeArray(String pathKunde) {
 
         ArrayList<Kunde> Kunden = null;
         try {
 
-            props.load(new FileInputStream("application.properties"));
-            String pathKunde = props.getProperty("path2");
 
             //System.out.println(path1);
             File inputFileKunde = new File(pathKunde);
@@ -50,9 +48,8 @@ public class ImportKunde {
         return Kunden;
     }
 
-    public static String getHashImportKunde() throws IOException {
-        props.load(new FileInputStream("application.properties"));
-        String pathKunde = props.getProperty("path2");
+    public static String getHashImportKunde(String pathKunde) throws IOException {
+
         String xmlstring =readFile(pathKunde);
         String hash = DigestUtils.sha256Hex( xmlstring);
         System.out.println("Apache : Sha256hash: "+ hash);
