@@ -22,7 +22,7 @@ public class Application {
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         DBStatement dbStatement=new DBStatement();
         Properties props = new Properties();
-        props.load(new FileInputStream("application.properties"));
+        props.load(new FileInputStream(".\\src\\main\\resources\\application.properties"));
         String pathFahrzeug = props.getProperty("path1");
         String pathKunde = props.getProperty("path2");
         

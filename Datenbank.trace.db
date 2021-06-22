@@ -266,3 +266,72 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 15 more
+2021-06-21 23:31:47 jdbc[13]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:245)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:186)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:251)
+	at DB.DBConnection.getConnection(DBConnection.java:9)
+	at CRUD.DBStatement.getAllKunden(DBStatement.java:270)
+	at Guinew.KundeCrudUi.tabellenload(KundeCrudUi.java:51)
+	at Guinew.KundeCrudUi.<init>(KundeCrudUi.java:67)
+	at Guinew.KundeCrudUi.start(KundeCrudUi.java:38)
+	at Main.Application.main(Application.java:118)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 15 more
+2021-06-22 00:34:03 jdbc[13]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:245)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:186)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:251)
+	at DB.DBConnection.getConnection(DBConnection.java:9)
+	at CRUD.DBStatement.getAllKunden(DBStatement.java:270)
+	at Guinew.KundeCrudUi.tabellenload(KundeCrudUi.java:51)
+	at Guinew.KundeCrudUi.<init>(KundeCrudUi.java:67)
+	at Guinew.KundeCrudUi.start(KundeCrudUi.java:38)
+	at Main.Application.main(Application.java:118)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 15 more
+2021-06-22 08:03:26 jdbc[13]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:245)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:186)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:251)
+	at DB.DBConnection.getConnection(DBConnection.java:9)
+	at CRUD.DBStatement.getAllKunden(DBStatement.java:270)
+	at Guinew.KundeCrudUi.tabellenload(KundeCrudUi.java:51)
+	at Guinew.KundeCrudUi.<init>(KundeCrudUi.java:67)
+	at Guinew.KundeCrudUi.start(KundeCrudUi.java:38)
+	at Main.Application.main(Application.java:118)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 15 more

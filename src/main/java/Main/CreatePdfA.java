@@ -47,9 +47,9 @@ public class CreatePdfA {
                 System.out.println(allefahrzeuge.size());
                 PdfPTable table = new PdfPTable(5);
                 for(Fahrzeug emp : allefahrzeuge)
-                    for(int aw = 0; aw < allefahrzeuge.size(); aw++){
-                        table.addCell(emp.getFahrzeugbezeichnung());
+                    for(int aw = 0; aw < 1; aw++){
                         table.addCell(emp.getFahrzeugtyp());
+                        table.addCell(emp.getFahrzeugbezeichnung());
                         table.addCell(emp.getHersteller());
                         table.addCell(String.valueOf(emp.getVerkaufspreise()));
                         table.addCell(String.valueOf(emp.getLeistung()));}
