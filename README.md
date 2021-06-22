@@ -1,0 +1,2 @@
+# Automobilhaus (Automobile house)
+This application automatically imports specific customer and vehicle informations from configurable XML-Files-Paths. It mainly uses the SAX Parser and only persists new data in a database (h2). The imports are registered with hash values (sha256) and also persisted in the database in order to detect efficiently duplicate imports. The enduser can interact with a GUI to fulfill certain CRUD operations and can also produce a letter for one customer in order to inform him about all available vehicles.
